@@ -13,11 +13,15 @@ if (Meteor.isClient) {
                 //   2: position unavailable (error response from locaton provider)
                 //   3: timed out
             });
+            setInterval(getLocation,1000);
 
-          navigator.geolocation.watchPosition(function(position) {
-              document.getElementById('currentLat').innerHTML = position.coords.latitude;
-              document.getElementById('currentLong').innerHTML = position.coords.longitude;
-          },function(){},{enableHighAccuracy: true});
+          
         }
     });
+    function getLocation() {
+        navigator.geolocation.getCurrentPosition(function(position) {
+              document.getElementById('currentLat').innerHTML = position.coords.latitude;
+              document.getElementById('currentLong').innerHTML = position.coords.longitude;
+          },function(){},{enableHighAccuracy: true, maximumAge: 3000});
+    }
 }
