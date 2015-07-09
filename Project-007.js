@@ -1,23 +1,21 @@
-if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
-
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
+$(document).ready(function() {
+    if (typeof navigator == 'undefined') {
+        console.log('Error!');
+    } else {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            console.log(position.coords.latitude + ' ' + position.coords.longitude + ' ' + position.coords.accuracy);
+        }, function(error) {
+            alert('Error occurred. Error code: ' + error.code);
+            // error.code can be:
+            //   0: unknown error
+            //   1: permission denied
+            //   2: position unavailable (error response from locaton provider)
+            //   3: timed out
+        });
+        
+      navigator.geolocation.watchPosition(function(position) {
+          document.getElementById('currentLat').innerHTML = position.coords.latitude;
+          document.getElementById('currentLong').innerHTML = position.coords.longitude;
+      },function(){},{enableHighAccuracy: true});
     }
-  });
-
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
-  });
-}
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
-}
+});
