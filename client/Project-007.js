@@ -22,6 +22,6 @@ if (Meteor.isClient) {
         navigator.geolocation.getCurrentPosition(function(position) {
               document.getElementById('currentLat').innerHTML = position.coords.latitude;
               document.getElementById('currentLong').innerHTML = position.coords.longitude;
-          },function(){},{enableHighAccuracy: true});
+          },function(){},{enableHighAccuracy: true,maximumAge:0});
     }
 }
