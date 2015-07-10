@@ -19,9 +19,10 @@ if (Meteor.isClient) {
         }
     });
     function getLocation() {
-        navigator.geolocation.getCurrentPosition(function(position) {
-              document.getElementById('currentLat').innerHTML = position.coords.latitude;
-              document.getElementById('currentLong').innerHTML = position.coords.longitude;
-          },function(){},{enableHighAccuracy: true,maximumAge:0});
+        var position = Geolocation.currentLocation();
+        if (!(typeof position == 'undefined' || position === null)) {
+            document.getElementById('currentLat').innerHTML = position.coords.latitude.toString();
+            document.getElementById('currentLong').innerHTML = position.coords.longitude.toString();
+        }
     }
 }
