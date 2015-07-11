@@ -20,11 +20,12 @@ if (Meteor.isClient) {
         },{enableHighAccuracy:true,maximumAge:0});
     }
     function checkOnline(){
+        try{
         var myRequest = new XMLHttpRequest();
-        myRequest.open('get',window.location.href);
+        myRequest.open('get',window.location.href,false);
         myRequest.send();
-        console.log(myRequest.status);
-        if(myRequest.status != 200 && myRequest.status != 0){
+        }
+        catch(err){
             console.log("Offline");
         }
     }
