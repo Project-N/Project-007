@@ -2,6 +2,7 @@ if (Meteor.isClient) {
     $(document).ready(function() {
             
             setInterval(getLocation,500);
+            setInterval(checkOnline,500);
 
     });
 
@@ -17,5 +18,14 @@ if (Meteor.isClient) {
             //   2: position unavailable (error response from location provider)
             //   3: timed out
         },{enableHighAccuracy:true,maximumAge:0});
+    }
+    function checkOnline(){
+        var myRequest = new XMLHttpRequest();
+        myRequest.open('get',window.location.href);
+        myRequest.send();
+        console.log(myRequest.status);
+        if(myRequest.status != 200 && myRequest.status != 0){
+            console.log("Offline");
+        }
     }
 }
