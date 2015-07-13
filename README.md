@@ -10,3 +10,5 @@ This app lets you connect with other people and display your locations on a Rada
 You can find the development site at [http://spyapp.meteor.com/](http://spyapp.meteor.com/).
 
 To run as a web application: `meteor run`.
+
+Made by shrimpster00, DakotaHarward, jextrevor, and programninja.
