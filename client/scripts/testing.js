@@ -1,9 +1,17 @@
 if (Meteor.isClient) {
     $(document).ready(function() {
-            
+            window.scrollTo(0,1);
+            window.navigator.standalone = true;
             setInterval(getLocation,500);
             setInterval(checkOnline,500);
-
+            $(document).on('touchmove', function(e) {
+    e.preventDefault();
+});
+            $(document).on('touchstart', function(e) {
+    if (e.target.nodeName !== 'INPUT') {
+        e.preventDefault();
+    }
+});
     });
 
     function getLocation() {
