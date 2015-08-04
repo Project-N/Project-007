@@ -1,5 +1,5 @@
 <template name="topbar">
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top" id="topbar" style="visibility:visible;">
 <div class="container-fluid">
 {{> menubutton}}
 {{> placeholdrightbutton}}
@@ -14,7 +14,7 @@
 </div>
 </template>
 <template name="bottombar">
-<nav class="navbar navbar-inverse navbar-fixed-bottom">
+<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottombar" style="visibility:visible;">
 <div class="container-fluid">
 {{> viewbutton}}
 {{> waypointbutton}}
@@ -27,7 +27,7 @@
 </svg>
 </template>
 <template name="menu">
-<div id="menu" style="visibility:hidden;" class="nonbounce menupanescrollablehahaha">
+<div id="menu" style="visibility:hidden;">
 <button class="btn btn-default btn-lg">Rate this app</button>
 <button class="btn btn-default btn-lg">Have a great day</button>
 <button class="btn btn-default btn-lg">Have a great day</button>

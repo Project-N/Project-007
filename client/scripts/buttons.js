@@ -9,6 +9,18 @@ Template.menubutton.events({
         else{
         	document.getElementById("menu").style.visibility = "hidden";
         }
+        /*if(document.getElementById("topbar").style.visibility == "hidden"){
+        	document.getElementById("topbar").style.visibility = "visible";
+        }
+        else{
+        	document.getElementById("topbar").style.visibility = "hidden";
+        }*/
+        if(document.getElementById("bottombar").style.visibility == "hidden"){
+        	document.getElementById("bottombar").style.visibility = "visible";
+        }
+        else{
+        	document.getElementById("bottombar").style.visibility = "hidden";
+        }
     }
 });
 Template.viewbutton.events({
