@@ -4,7 +4,13 @@ if (Meteor.isClient) {
             //window.navigator.standalone = true;
             //setInterval(getLocation,500);
             //setInterval(checkOnline,500);
-            document.ontouchmove = function(e) {e.preventDefault()};
+            document.ontouchmove = function(e) {if (!event.elementIsEnabled)
+            event.preventDefault();
+};
+            //$.nonbounce();
+            document.getElementById("menu").ontouchmove = enableOnTouchMove;
+   
+            
     });
 
     function getLocation() {
@@ -30,4 +36,8 @@ if (Meteor.isClient) {
             console.log("Offline");
         }
     }
+    function enableOnTouchMove(event) {
+      event.elementIsEnabled = true;
+    };
+
 }

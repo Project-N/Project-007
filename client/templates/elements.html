@@ -2,15 +2,15 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
 <div class="container-fluid">
 {{> menubutton}}
-{{> details}}
 {{> placeholdrightbutton}}
+{{> details}}
 </div>
 </nav>
 </template>
 <template name="details">
-<div class="text-center">
-<h3 class="white">Test Object</h3>
-<h4 class="white">43m away</h4>
+<div class="text-center container">
+<h4 class="white">Test Object</h4>
+<h5 class="white">43m away</h5>
 </div>
 </template>
 <template name="bottombar">
@@ -20,4 +20,38 @@
 {{> waypointbutton}}
 </div>
 </nav>
+</template>
+<template name="viewport">
+<svg id="mainview" width="{{screenwidth}}" height="{{screenheight}}">
+<rect width="{{screenwidth}}" height="{{screenheight}}" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />
+</svg>
+</template>
+<template name="menu">
+<div id="menu" style="visibility:hidden;" class="nonbounce menupanescrollablehahaha">
+<button class="btn btn-default btn-lg">Rate this app</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+<button class="btn btn-default btn-lg">Have a great day</button>
+</div>
 </template>

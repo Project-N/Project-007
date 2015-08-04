@@ -3,7 +3,12 @@
  */
 Template.menubutton.events({
     'click a': function(event) {
-        alert('Menu!');
+        if(document.getElementById("menu").style.visibility == "hidden"){
+        	document.getElementById("menu").style.visibility = "visible";
+        }
+        else{
+        	document.getElementById("menu").style.visibility = "hidden";
+        }
     }
 });
 Template.viewbutton.events({
@@ -16,3 +21,12 @@ Template.waypointbutton.events({
         alert('Waypoint!');
     }
 });
+
+Template.viewport.helpers({
+	screenwidth: function(){
+		return window.innerWidth;
+	},
+	screenheight:function(){
+		return window.innerHeight - 144;
+	}
+})
