@@ -11,8 +11,21 @@ if (Meteor.isClient) {
             document.getElementById("menu").ontouchmove = enableOnTouchMove;
    
             
-    });
 
+
+    });
+window.requestAnimFrame = function(){
+    return (
+        window.requestAnimationFrame       || 
+        window.webkitRequestAnimationFrame || 
+        window.mozRequestAnimationFrame    || 
+        window.oRequestAnimationFrame      || 
+        window.msRequestAnimationFrame     || 
+        function(/* function */ callback){
+            window.setTimeout(callback, 1000 / 60);
+        }
+    );
+}();
     function getLocation() {
         navigator.geolocation.getCurrentPosition(function(position) {
             document.getElementById('currentLat').innerHTML = position.coords.latitude.toString();
@@ -39,5 +52,8 @@ if (Meteor.isClient) {
     function enableOnTouchMove(event) {
       event.elementIsEnabled = true;
     };
+    function renderthread(){
+        requestAnimFrame(renderthread);
+    }
 
 }
