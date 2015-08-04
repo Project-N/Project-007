@@ -10,7 +10,7 @@ if (Meteor.isClient) {
             //$.nonbounce();
             document.getElementById("menu").ontouchmove = enableOnTouchMove;
    
-            
+            Session.set("open",false);
 
 
     });
@@ -54,6 +54,19 @@ window.requestAnimFrame = function(){
     };
     function renderthread(){
         requestAnimFrame(renderthread);
+    }
+    function distance(lat1, lng1, lat2, lng2) {
+    earthRadius = 6371000; //meters
+    dLat = toRadians(lat2-lat1);
+    dLng = toRadians(lng2-lng1);
+    a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dLng/2) * Math.sin(dLng/2);
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    dist = (float) (earthRadius * c);
+
+    return dist;
+    }
+    function toRadians(value){
+        return value * (Math.PI /180);
     }
 
 }

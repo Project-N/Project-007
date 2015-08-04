@@ -3,12 +3,12 @@
  */
 Template.menubutton.events({
     'click a': function(event) {
-        if(document.getElementById("menu").style.visibility == "hidden"){
+        /*if(document.getElementById("menu").style.visibility == "hidden"){
         	document.getElementById("menu").style.visibility = "visible";
         }
         else{
         	document.getElementById("menu").style.visibility = "hidden";
-        }
+        }*/
         /*if(document.getElementById("topbar").style.visibility == "hidden"){
         	document.getElementById("topbar").style.visibility = "visible";
         }
@@ -20,6 +20,14 @@ Template.menubutton.events({
         }
         else{
         	document.getElementById("bottombar").style.visibility = "hidden";
+        }
+        if(Session.get("open") == false || document.getElementById("menu").style.left == "-100%"){
+        	document.getElementById("menu").style.left = "0px";
+        	Session.set("open",true);
+        }
+        else{
+        	document.getElementById("menu").style.left = "-100%";
+        	Session.set("open",false);
         }
     }
 });
