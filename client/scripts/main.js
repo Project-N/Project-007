@@ -12,7 +12,6 @@ if (Meteor.isClient) {
    
             Session.set("open",false);
 
-
     });
 window.requestAnimFrame = function(){
     return (

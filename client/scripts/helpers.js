@@ -48,5 +48,14 @@ Template.viewport.helpers({
 	},
 	screenheight:function(){
 		return window.innerHeight - 144;
-	}
-})
+	},
+    players:Players.find().fetch()
+});
+Template.dot.helpers({
+    x:function(){
+        return this.id;
+    },
+    y:function(){
+        return this.team;
+    }
+});
