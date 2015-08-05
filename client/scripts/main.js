@@ -87,5 +87,3 @@ window.requestAnimFrame = function(){
     function gety(yourlat,yourlng,lat,lng){
         return ((window.innerHeight-144)/2) + (distance(yourlat,yourlng,lat,yourlng)*3);
     }
-
-}
