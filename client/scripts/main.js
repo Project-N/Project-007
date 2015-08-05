@@ -1,18 +1,17 @@
-if (Meteor.isClient) {
-    $(document).ready(function() {
-            //window.scrollTo(0,1);
-            //window.navigator.standalone = true;
-            //setInterval(getLocation,500);
-            //setInterval(checkOnline,500);
-            document.ontouchmove = function(e) {if (!event.elementIsEnabled)
-            event.preventDefault();
+$(document).ready(function() {
+        //window.scrollTo(0,1);
+        //window.navigator.standalone = true;
+        //setInterval(getLocation,500);
+        //setInterval(checkOnline,500);
+        document.ontouchmove = function(e) {if (!event.elementIsEnabled)
+        event.preventDefault();
 };
-            //$.nonbounce();
-            document.getElementById("menu").ontouchmove = enableOnTouchMove;
-   
-            Session.set("open",false);
+        //$.nonbounce();
+        document.getElementById("menu").ontouchmove = enableOnTouchMove;
 
-    });
+        Session.set("open",false);
+
+});
 window.requestAnimFrame = function(){
     return (
         window.requestAnimationFrame       || 
