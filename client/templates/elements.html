@@ -22,11 +22,10 @@
 </nav>
 </template>
 <template name="viewport">
-    {{#each players}}
+<svg id="mainview" width="{{screenwidth}}" height="{{screenheight}}">
+{{#each players}}
     {{> dot}}
 {{/each}}
-<svg id="mainview" width="{{screenwidth}}" height="{{screenheight}}">
-
 </svg>  
 </template>
 <template name="menu">
@@ -35,5 +34,4 @@
 </div>
 </template>
 <template name="dot">
-    <h1 class="white">X is {{x}}, Y is {{y}}</h1>
 </template>
