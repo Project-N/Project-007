@@ -14,7 +14,7 @@
 </div>
 </template>
 <template name="bottombar">
-<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottombar" style="visibility:visible;">
+<nav class="navbar navbar-inverse navbar-fixed-bottom" id="bottombar" style="visibility:visible;bottom:0px;">
 <div class="container-fluid">
 {{> viewbutton}}
 {{> waypointbutton}}
@@ -23,6 +23,14 @@
 </template>
 <template name="viewport">
 <svg id="mainview" width="{{screenwidth}}" height="{{screenheight}}">
+<g
+     transform="translate({{youx}},{{youy}})"
+     id="layer1">
+    <path
+       id="you"
+       d="m 0,1039.4426 13,12.9642 13,-12.9642 z"
+       style="fill:#007aff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  </g>
 {{#each players}}
     {{> dot}}
 {{/each}}
