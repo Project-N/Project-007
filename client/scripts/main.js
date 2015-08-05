@@ -28,10 +28,16 @@ window.requestAnimFrame = function(){
 }();
     function getLocation() {
         navigator.geolocation.getCurrentPosition(function(position) {
-            document.getElementById('currentLat').innerHTML = position.coords.latitude.toString();
-            document.getElementById('currentLong').innerHTML = position.coords.longitude.toString();
+            //document.getElementById('currentLat').innerHTML = position.coords.latitude.toString();
+            //document.getElementById('currentLong').innerHTML = position.coords.longitude.toString();
         }, function(error) {
-            alert('Error occurred. Error code: ' + error.code);
+            //alert('Error occurred. Error code: ' + error.code);
+            if(error.code == 1){
+                alert("Please turn on Location Services and GPS, and allow your app to use them.");
+            }
+            if(error.code == 2){
+                //Location unavailable - you go into gray mode.
+            }
             // error.code can be:
             //   0: unknown error
             //   1: permission denied
@@ -53,6 +59,15 @@ window.requestAnimFrame = function(){
       event.elementIsEnabled = true;
     };
     function renderthread(){
+        for(i in Players.find().fetch()){
+            if(!!document.getElementById(i._id)){
+                //object was found.
+                //MODIFY X AND Y
+            }
+            else{
+                //PLACE NEW OBJECT ONTO MAP AT X AND Y
+            }
+        }
         requestAnimFrame(renderthread);
     }
     function distance(lat1, lng1, lat2, lng2) {
@@ -67,6 +82,12 @@ window.requestAnimFrame = function(){
     }
     function toRadians(value){
         return value * (Math.PI /180);
+    }
+    function getx(yourlat,yourlng,lat,lng){
+        return (window.innerWidth/2) + (distance(yourlat,yourlng,yourlat,lng)*3);
+    }
+    function gety(yourlat,yourlng,lat,lng){
+        return ((window.innerHeight-144)/2) + (distance(yourlat,yourlng,lat,yourlng)*3);
     }
 
 }
