@@ -13,7 +13,6 @@ $(document).ready(function() {
 
     var id = Math.random().toString(36).substring(2);
     Session.set('id', id);
-    console.log(id);
     Meteor.call('newPlayer', id, 'Team 1', 0, 0, 0, 0, 0);
     watchPosition();
 
@@ -76,7 +75,6 @@ watchPosition = function() {
     return 'Location set.';
 }
 setPosition = function(lat, long, speed, heading, accuracy) {
-    console.log(lat,long,speed,heading,accuracy);
     Meteor.call('updatePlayer', Session.get('id'), lat, long, speed, heading, accuracy);
 }
     function checkOnline(){
