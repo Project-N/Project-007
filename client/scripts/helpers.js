@@ -52,16 +52,16 @@ Template.viewport.helpers({
 		return window.innerHeight - 144;
 	},
     youx:function(){
-        return (window.innerWidth/2)-13;
+        return (window.innerWidth/2)-13 + Session.get("offsetx");
     },
     youy:function(){
-        return ((window.innerHeight-144)/2)-1052.3622;
+        return ((window.innerHeight-144)/2)-1052.3622 + Session.get("offsety");
     },
     youyu:function(){
-        return ((window.innerHeight-144)/2);
+        return ((window.innerHeight-144)/2) + Session.get("offsety");
     },
     youxu:function(){
-        return (window.innerWidth/2)
+        return (window.innerWidth/2) + Session.get("offsetx");
     },
     youcolor:function(){
         return swatches[Players.findOne({id: Session.get("id")}).team];

@@ -22,6 +22,7 @@
 </nav>
 </template>
 <template name="viewport">
+<div id="wrapper">
 <svg id="mainview" width="{{screenwidth}}" height="{{screenheight}}">
 <g
      transform="translate({{youx}},{{youy}})"
@@ -36,6 +37,7 @@
     {{> dot}}
 {{/each}}
 </svg>  
+</div>
 </template>
 <template name="menu">
 <div id="menu" style="left:-100%;">

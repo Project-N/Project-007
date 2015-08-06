@@ -13,9 +13,13 @@ $(document).ready(function() {
 
     var id = Math.random().toString(36).substring(2);
     Session.set('id', id);
-    Session.set('zoom',0.5)
+    Session.set('zoom',0.5);
+    Session.set("offsetx", 0);
+    Session.set("offsety", 0);
     Meteor.call('newPlayer', id, 0, 0, 0, 0, 0, 0);
     updatePosition();
+    //setTimeout(hammersetup,2000);
+    
 
 });
 $(window).bind('beforeunload', function(){
