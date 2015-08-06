@@ -1,7 +1,7 @@
 $(document).ready(function() {
         //window.scrollTo(0,1);
         //window.navigator.standalone = true;
-        //setInterval(getLocation,500);
+        setInterval(updatePosition,500);
         //setInterval(checkOnline,500);
         document.ontouchmove = function(e) {if (!event.elementIsEnabled)
         event.preventDefault();
@@ -13,7 +13,8 @@ $(document).ready(function() {
 
     var id = Math.random().toString(36).substring(2);
     Session.set('id', id);
-    Meteor.call('newPlayer', id, 'Team 1', 0, 0, 0, 0, 0);
+    Session.set('zoom',0.5)
+    Meteor.call('newPlayer', id, 0, 0, 0, 0, 0, 0);
     updatePosition();
 
 });
@@ -116,8 +117,8 @@ setPosition = function(lat, long, speed, heading, accuracy) {
         return value * (Math.PI /180);
     }
     function getx(yourlat,yourlng,lat,lng){
-        return (window.innerWidth/2) + (distance(yourlat,yourlng,yourlat,lng)*3);
+        return (window.innerWidth/2) + (distance(yourlat,yourlng,yourlat,lng)*Session.get("zoom"));
     }
     function gety(yourlat,yourlng,lat,lng){
-        return ((window.innerHeight-144)/2) + (distance(yourlat,yourlng,lat,yourlng)*3);
+        return ((window.innerHeight-144)/2) + (distance(yourlat,yourlng,lat,yourlng)*Session.get("zoom"));
     }

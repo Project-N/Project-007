@@ -43,7 +43,7 @@ Template.waypointbutton.events({
         alert('Waypoint!');
     }
 });
-
+swatches = ["#44FF00","#FF4400","#0044FF","#FFFF00","#00DDDD","#FF00FF"]
 Template.viewport.helpers({
 	screenwidth: function(){
 		return window.innerWidth;
@@ -56,6 +56,18 @@ Template.viewport.helpers({
     },
     youy:function(){
         return ((window.innerHeight-144)/2)-1052.3622;
+    },
+    youyu:function(){
+        return ((window.innerHeight-144)/2);
+    },
+    youxu:function(){
+        return (window.innerWidth/2)
+    },
+    youcolor:function(){
+        return swatches[Players.findOne({id: Session.get("id")}).team];
+    },
+    youaccuracy:function(){
+        return Players.findOne({id: Session.get("id")}).position.accuracy * Session.get("zoom");
     },
     players:Players.find().fetch()
 });
