@@ -14,7 +14,7 @@ $(document).ready(function() {
     var id = Math.random().toString(36).substring(2);
     Session.set('id', id);
     Meteor.call('newPlayer', id, 'Team 1', 0, 0, 0, 0, 0);
-    watchPosition();
+    updatePosition();
 
 });
 $(window).bind('beforeunload', function(){
@@ -55,7 +55,7 @@ window.requestAnimFrame = function(){
     },{enableHighAccuracy:true,maximumAge:0});
     return position;
 }*/
-watchPosition = function() {
+updatePosition = function() {
     navigator.geolocation.getCurrentPosition(function(position) {
         setPosition(position.coords.latitude, position.coords.longitude, position.coords.speed, position.coords.heading, position.coords.accuracy);
     }, function(error) {
