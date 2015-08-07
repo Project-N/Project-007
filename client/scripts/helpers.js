@@ -54,6 +54,12 @@ Template.viewport.helpers({
     youx:function(){
         return (window.innerWidth/2)-13 + Session.get("offsetx");
     },
+    rotate:function(){
+        return Session.get('rotation');
+    },
+    scale:function(){
+        return Session.get('scale');
+    },
     youy:function(){
         return ((window.innerHeight-144)/2)-1052.3622 + Session.get("offsety");
     },

@@ -14,19 +14,26 @@ $(document).ready(function() {
     var id = Math.random().toString(36).substring(2);
     Session.set('id', id);
     Session.set('zoom',0.5);
+    Session.set('scale',1);
+    Session.set('rotation',0);
+    Session.set('previousRotation',0);
     Session.set("offsetx", 0);
     Session.set("offsety", 0);
+    Session.set("locked", true);
     Meteor.call('newPlayer', id, 0, 0, 0, 0, 0, 0);
     updatePosition();
     var hammertime = new Hammer(document.getElementById("wrapper"));
     hammertime.get('pinch').set({ enable: true });
     hammertime.get('rotate').set({ enable: true });
     hammertime.on('pinch', function(ev) {
-        alert("hi");
+        Session.set('zoom', Session.get('zoom') * (((ev.scale-1)/20)+1));
     });
-    hammertime.on('rotate', function(ev) {
-        alert("hi2");
+    hammertime.on('rotatemove', function(ev) {
+        Session.set('rotation', Session.get('previousRotation') + ev.rotation);
     });
+    hammertime.on('rotateend', function(ev){
+        Session.set('previousRotation', Session.get('rotation'));
+    })
     //setTimeout(hammersetup,2000);
 //$('#wrapper').bind('touchy-pinch', onZoom);
       

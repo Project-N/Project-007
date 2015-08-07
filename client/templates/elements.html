@@ -24,6 +24,7 @@
 <template name="viewport">
 <div id="wrapper">
 <svg id="mainview" width="{{screenwidth}}" height="{{screenheight}}">
+<g id="svgwrapper" transform="rotate({{rotate}} {{youxu}} {{youyu}}) scale({{scale}})">
 <g
      transform="translate({{youx}},{{youy}})"
      id="layer1">
@@ -33,9 +34,7 @@
        style="fill:{{youcolor}};fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
   </g>
   <circle id="youaccuracy" cx="{{youxu}}" cy="{{youyu}}" r="{{youaccuracy}}" stroke="{{youcolor}}" stroke-width="2" fill="{{youcolor}}" fill-opacity="0.25" />
-{{#each players}}
-    {{> dot}}
-{{/each}}
+</g>
 </svg>  
 </div>
 </template>
