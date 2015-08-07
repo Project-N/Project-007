@@ -6,3 +6,4 @@
 
 meteor-platform
 less
+hammer:hammer@=2.0.4_1

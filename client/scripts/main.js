@@ -18,9 +18,18 @@ $(document).ready(function() {
     Session.set("offsety", 0);
     Meteor.call('newPlayer', id, 0, 0, 0, 0, 0, 0);
     updatePosition();
+    var hammertime = new Hammer(document.getElementById("wrapper"));
+    hammertime.get('pinch').set({ enable: true });
+    hammertime.get('rotate').set({ enable: true });
+    hammertime.on('pinch', function(ev) {
+        alert("hi");
+    });
+    hammertime.on('rotate', function(ev) {
+        alert("hi2");
+    });
     //setTimeout(hammersetup,2000);
-    
-
+//$('#wrapper').bind('touchy-pinch', onZoom);
+      
 });
 $(window).bind('beforeunload', function(){
   Meteor.call('removePlayer',Session.get('id'));
@@ -37,6 +46,11 @@ window.requestAnimFrame = function(){
         }
     );
 }();
+
+/*onZoom = function(event, phase, $target, data){
+    alert("hi");
+    Session.set('zoom',Session.get('zoom')*data.scale/data.previousScale);
+}*/
 /*getLocation = function() {
     var position;
     navigator.geolocation.getCurrentPosition(function(pos) {
