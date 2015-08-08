@@ -19,12 +19,16 @@ $(document).ready(function() {
     Session.set('previousRotation',0);
     Session.set("offsetx", 0);
     Session.set("offsety", 0);
+    Session.set("previousoffsetx", 0);
+    Session.set("previousoffsety", 0);
     Session.set("locked", true);
     Meteor.call('newPlayer', id, 0, 0, 0, 0, 0, 0);
     updatePosition();
     var hammertime = new Hammer(document.getElementById("wrapper"));
     hammertime.get('pinch').set({ enable: true });
     hammertime.get('rotate').set({ enable: true });
+    hammertime.get('pan').set({ enable: true });
+    hammertime.get('pan').set({direction: Hammer.DIRECTION_ALL})
     hammertime.on('pinch', function(ev) {
         Session.set('zoom', Session.get('zoom') * (((ev.scale-1)/20)+1));
     });
@@ -33,7 +37,15 @@ $(document).ready(function() {
     });
     hammertime.on('rotateend', function(ev){
         Session.set('previousRotation', Session.get('rotation'));
-    })
+    });
+    hammertime.on('panmove',function(ev){
+        Session.set('offsetx', Session.get('previousoffsetx')+ev.deltaX/2);
+        Session.set('offsety', Session.get('previousoffsety')+ev.deltaY/2);
+    });
+    hammertime.on('panend', function(ev){
+        Session.set('previousoffsetx', Session.get('offsetx'));
+        Session.set('previousoffsety', Session.get('offsety'));
+    });
     //setTimeout(hammersetup,2000);
 //$('#wrapper').bind('touchy-pinch', onZoom);
       
@@ -83,6 +95,7 @@ window.requestAnimFrame = function(){
 }*/
 updatePosition = function() {
     navigator.geolocation.getCurrentPosition(function(position) {
+        Session.set("locationerr", false);
         setPosition(position.coords.latitude, position.coords.longitude, position.coords.speed, position.coords.heading, position.coords.accuracy);
     }, function(error) {
         //alert('Error occurred. Error code: ' + error.code);
@@ -90,7 +103,7 @@ updatePosition = function() {
             alert("Please turn on Location Services and GPS, and allow your app to use them.");
         }
         if(error.code == 2){
-            //Location unavailable - you go into gray mode.
+            Session.set("locationerr", true);
         }
         // error.code can be:
         //   0: unknown error

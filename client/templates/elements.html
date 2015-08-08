@@ -24,7 +24,7 @@
 <template name="viewport">
 <div id="wrapper">
 <svg id="mainview" width="{{screenwidth}}" height="{{screenheight}}">
-<g id="svgwrapper" transform="rotate({{rotate}} {{youxu}} {{youyu}}) scale({{scale}})">
+<g id="svgwrapper" transform="translate({{offsetx}} {{offsety}}) rotate({{rotate}} {{centerx}} {{centery}}) scale({{scale}})">
 <g
      transform="translate({{youx}},{{youy}})"
      id="layer1">
@@ -34,6 +34,9 @@
        style="fill:{{youcolor}};fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
   </g>
   <circle id="youaccuracy" cx="{{youxu}}" cy="{{youyu}}" r="{{youaccuracy}}" stroke="{{youcolor}}" stroke-width="2" fill="{{youcolor}}" fill-opacity="0.25" />
+{{#each players}}
+{{> dot}}
+{{/each}}
 </g>
 </svg>  
 </div>
@@ -44,5 +47,15 @@
 </div>
 </template>
 <template name="dot">
-
+<g
+     transform="translate({{x}},{{y}})"
+     id="layer1">
+    <circle
+       r="13"
+       cy="1039.3622"
+       cx="13"
+       id="path4156"
+       style="fill:{{color}};fill-opacity:1;stroke:none" />
+  </g>
+  <circle id="acc" cx="{{xu}}" cy="{{yu}}" r="{{accuracy}}" stroke="{{color}}" stroke-width="2" fill="{{color}}" fill-opacity="0.25" />
 </template>
