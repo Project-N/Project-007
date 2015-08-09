@@ -39,8 +39,8 @@ $(document).ready(function() {
         Session.set('previousRotation', Session.get('rotation'));
     });
     hammertime.on('panmove',function(ev){
-        Session.set('offsetx', Session.get('previousoffsetx')+ev.deltaX/2);
-        Session.set('offsety', Session.get('previousoffsety')+ev.deltaY/2);
+        Session.set('offsetx', Session.get('previousoffsetx')+ev.deltaX);
+        Session.set('offsety', Session.get('previousoffsety')+ev.deltaY);
     });
     hammertime.on('panend', function(ev){
         Session.set('previousoffsetx', Session.get('offsetx'));
