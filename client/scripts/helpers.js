@@ -72,7 +72,11 @@ Template.viewport.helpers({
 		return window.innerHeight - 144;
 	},
     youx:function(){
-        if(Session.get('locked')==true){
+        var locked = Session.get('locked');
+        if (typeof locked == 'undefined') {
+            locked = true;
+        }
+        if(locked){
         return (window.innerWidth/2)-13;
         }
         else{
@@ -111,7 +115,31 @@ Template.viewport.helpers({
         return ((window.innerHeight-144)/2)-1052.3622;
     }
     else{
-        return gety(Session.get('lastPos').lat,Session.get('lastPos').long,Players.findOne({id: Session.get('id')}).position.latitude,Players.findOne({id: Session.get('id')}).position.longitude)-1052.3622;
+        var player = Players.findOne({id: Session.get("id")});
+        if (typeof player == 'undefined') {
+            player = {};
+        }
+        if (typeof player.position == 'undefined') {
+            player.position = {latitude: null, longitude: null};
+        }
+        var lastPos = Session.get('lastPos');
+        if (typeof lastPos == 'undefined') {
+            var id = Session.get('id');
+            if (typeof id == 'undefined') {
+                id = "";
+            }
+            var player = Players.findOne({id: id});
+            if (typeof player == 'undefined') {
+                player = {
+                    position: {
+                        latitude: null,
+                        longitude: null
+                    }
+                }
+            }
+            lastPos = {'lat':player.position.latitude,'long':player.position.longitude};
+        }
+        return gety(lastPos.lat,lastPos.long,player.position.latitude,player.position.longitude)-1052.3622;
         }
     },
     youyu:function(){
@@ -119,7 +147,37 @@ Template.viewport.helpers({
         return ((window.innerHeight-144)/2);
     }
     else{
-        return gety(Session.get('lastPos').lat,Session.get('lastPos').long,Players.findOne({id: Session.get('id')}).position.latitude,Players.findOne({id: Session.get('id')}).position.longitude);
+        var lastPos = Session.get('lastPos');
+        if (typeof lastPos == 'undefined') {
+            var id = Session.get('id');
+            if (typeof id == 'undefined') {
+                id = "";
+            }
+            var player = Players.findOne({id: id});
+            if (typeof player == 'undefined') {
+                player = {
+                    position: {
+                        latitude: null,
+                        longitude: null
+                    }
+                }
+            }
+            lastPos = {'lat':player.position.latitude,'long':player.position.longitude};
+        }
+        var id = Session.get('id');
+        if (typeof id == 'undefined') {
+            id = "";
+        }
+        var player = Players.findOne({id: id});
+        if (typeof player == 'undefined') {
+            player = {
+                position: {
+                    latitude: null,
+                    longitude: null
+                }
+            }
+        }
+        return gety(lastPos.lat,lastPos.long,player.position.latitude,player.position.longitude);
         }
     },
     youxu:function(){
@@ -127,7 +185,37 @@ Template.viewport.helpers({
         return (window.innerWidth/2);
     }
         else{
-        return getx(Session.get('lastPos').lat,Session.get('lastPos').long,Players.findOne({id: Session.get('id')}).position.latitude,Players.findOne({id: Session.get('id')}).position.longitude);
+        var lastPos = Session.get('lastPos');
+        if (typeof lastPos == 'undefined') {
+            var id = Session.get('id');
+            if (typeof id == 'undefined') {
+                id = "";
+            }
+            var player = Players.findOne({id: id});
+            if (typeof player == 'undefined') {
+                player = {
+                    position: {
+                        latitude: null,
+                        longitude: null
+                    }
+                }
+            }
+            lastPos = {'lat':player.position.latitude,'long':player.position.longitude};
+        }
+        var id = Session.get('id');
+        if (typeof id == 'undefined') {
+            id = "";
+        }
+        var player = Players.findOne({id: id});
+        if (typeof player == 'undefined') {
+            player = {
+                position: {
+                    latitude: null,
+                    longitude: null
+                }
+            }
+        }
+        return getx(lastPos.lat,lastPos.long,player.position.latitude,player.position.longitude);
         }
     },
     centerx:function(){
@@ -138,14 +226,33 @@ Template.viewport.helpers({
     },
     youcolor:function(){
         if(Session.get("locationerr")==false){
-        return swatches[Players.findOne({id: Session.get("id")}).team];
+            var id = Players.findOne({id: Session.get("id")});
+            if (typeof id == 'undefined') {
+                id = {};
+            }
+            if (typeof id.team == 'undefined') {
+                id.team = "#999999";
+            }
+            team = id.team;
+        return swatches[team];
     }
     else{
         return "#999999";
     }
     },
     youaccuracy:function(){
-        return Players.findOne({id: Session.get("id")}).position.accuracy * Session.get("zoom");
+        var id = Players.findOne({id: Session.get("id")});
+        if (typeof id == 'undefined') {
+            id = {};
+        }
+        if (typeof id.position == 'undefined' || id.position.accuracy == 'undefined') {
+            id.position = {accuracy: 0};
+        }
+        var zoom = Session.get("zoom");
+        if (typeof zoom == 'undefined') {
+            zoom = 0.5;
+        }
+        return id.position.accuracy * zoom;
     },
     players:Players.find().fetch()
 });
