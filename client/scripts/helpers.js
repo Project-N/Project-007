@@ -92,7 +92,11 @@ Template.viewport.helpers({
     }
     },
     scale:function(){
-        return Session.get('scale');
+        var scale = Session.get('scale');
+        if (typeof scale == 'undefined') {
+            scale = 1;
+        }
+        return scale;
     },
     offsetx:function(){
         if(Session.get('locked')== false){
@@ -111,7 +115,11 @@ Template.viewport.helpers({
         }
     },
     youy:function(){
-        if(Session.get('locked')==true){
+        var locked = Session.get('locked');
+        if (typeof locked == 'undefined') {
+            locked = true;
+        }
+        if(locked){
         return ((window.innerHeight-144)/2)-1052.3622;
     }
     else{
@@ -139,11 +147,17 @@ Template.viewport.helpers({
             }
             lastPos = {'lat':player.position.latitude,'long':player.position.longitude};
         }
-        return gety(lastPos.lat,lastPos.long,player.position.latitude,player.position.longitude)-1052.3622;
+        var y = gety(lastPos.lat,lastPos.long,player.position.latitude,player.position.longitude);
+        console.log(y,lastPos.lat,lastPos.long,player.position.latitude,player.position.longitude);
+        return y-1052.3622;
         }
     },
     youyu:function(){
-        if(Session.get('locked')==true){
+        var locked = Session.get('locked');
+        if (typeof locked == 'undefined') {
+            locked = true;
+        }
+        if(locked){
         return ((window.innerHeight-144)/2);
     }
     else{
@@ -181,7 +195,11 @@ Template.viewport.helpers({
         }
     },
     youxu:function(){
-        if(Session.get('locked')==true){
+        var locked = Session.get('locked');
+        if (typeof locked == 'undefined') {
+            locked = true;
+        }
+        if(locked){
         return (window.innerWidth/2);
     }
         else{
@@ -254,7 +272,40 @@ Template.viewport.helpers({
         }
         return id.position.accuracy * zoom;
     },
-    players:Players.find().fetch()
+    players: function() {
+//        var players = [];
+//        var playerList = Players.find().fetch();
+//        for (var ii = 0, bb = playerList.length; ii < bb; ii++) {
+//            var tempObj = {};
+//            var locked = Session.get('locked');
+//            if (typeof locked == 'undefined') {
+//                locked = false;
+//            }
+//            var id = Session.get('id');
+//            if (typeof id == 'undefined') {
+//                id = '';
+//            }
+//            var player = Players.findOne({id: id});
+//            if (typeof player == 'undefined') {
+//                player = {
+//                    position: {
+//                        latitude: null,
+//                        longitude: null
+//                    }
+//                }
+//            }
+//            var x = 0;
+//            if(locked){
+//                x = getx(player.position.latitude,player.position.longitude,this.position.latitude,this.position.longitude)-13;
+//            }
+//            else{
+//                x = getx(Session.get('lastPos').lat,Session.get('lastPos').long,this.position.latitude,this.position.longitude)-13;
+//            }
+//            tempObj.x = x;
+//            console.log(x);
+//        }
+        return Players.find().fetch();
+    }
 });
 Template.dot.helpers({
     x:function(){
@@ -267,6 +318,7 @@ Template.dot.helpers({
     }
     },
     y:function(){
+        console.log("hi");
         if(Session.get('locked')==true){
         return gety(Players.findOne({id: Session.get('id')}).position.latitude,Players.findOne({id: Session.get('id')}).position.longitude,this.position.latitude,this.position.longitude)-13;
     }
@@ -275,8 +327,26 @@ Template.dot.helpers({
     }
     },
     xu:function(){
-         if(Session.get('locked')==true){
-        return getx(Players.findOne({id: Session.get('id')}).position.latitude,Players.findOne({id: Session.get('id')}).position.longitude,this.position.latitude,this.position.longitude);
+        var locked = Session.get('locked');
+        if (typeof locked == 'undefined') {
+            locked = true;
+        }
+         if(locked){
+             var id = Session.get('id');
+             if (typeof id == 'undefined') {
+                 id = '';
+             }
+             var player = Players.findOne({id: id});
+             if (typeof player == 'undefined') {
+                 player = {
+                     position: {
+                         latitude: null,
+                         longitude: null
+                     }
+                 }
+             }
+             var x = getx(player.position.latitude,player.position.longitude,this.position.latitude,this.position.longitude);
+        return x;
     }
     else{
         return getx(Session.get('lastPos').lat,Session.get('lastPos').long,this.position.latitude,this.position.longitude);
