@@ -80,7 +80,11 @@ Template.viewport.helpers({
         return (window.innerWidth/2)-13;
         }
         else{
-        return getx(Session.get('lastPos').lat,Session.get('lastPos').long,Players.findOne({id: Session.get('id')}).position.latitude,Players.findOne({id: Session.get('id')}).position.longitude)-13;
+            var zoom = Session.get('zoom');
+            if (typeof zoom == 'undefined') {
+                zoom = 0.5;
+            }
+        return getx(Session.get('lastPos').lat,Session.get('lastPos').long,Players.findOne({id: Session.get('id')}).position.latitude,Players.findOne({id: Session.get('id')}).position.longitude,zoom)-13;
         }
     },
     rotate:function(){
@@ -147,7 +151,11 @@ Template.viewport.helpers({
             }
             lastPos = {'lat':player.position.latitude,'long':player.position.longitude};
         }
-        var y = gety(lastPos.lat,lastPos.long,player.position.latitude,player.position.longitude);
+        var zoom = Session.get('zoom');
+            if (typeof zoom == 'undefined') {
+                zoom = 0.5;
+            }
+        var y = gety(lastPos.lat,lastPos.long,player.position.latitude,player.position.longitude,zoom);
         console.log(y,lastPos.lat,lastPos.long,player.position.latitude,player.position.longitude);
         return y-1052.3622;
         }
@@ -191,7 +199,11 @@ Template.viewport.helpers({
                 }
             }
         }
-        return gety(lastPos.lat,lastPos.long,player.position.latitude,player.position.longitude);
+        var zoom = Session.get('zoom');
+            if (typeof zoom == 'undefined') {
+                zoom = 0.5;
+            }
+        return gety(lastPos.lat,lastPos.long,player.position.latitude,player.position.longitude,zoom);
         }
     },
     youxu:function(){
@@ -232,8 +244,11 @@ Template.viewport.helpers({
                     longitude: null
                 }
             }
-        }
-        return getx(lastPos.lat,lastPos.long,player.position.latitude,player.position.longitude);
+        }var zoom = Session.get('zoom');
+            if (typeof zoom == 'undefined') {
+                zoom = 0.5;
+            }
+        return getx(lastPos.lat,lastPos.long,player.position.latitude,player.position.longitude,zoom);
         }
     },
     centerx:function(){
@@ -311,19 +326,35 @@ Template.dot.helpers({
     x:function(){
         console.log("hi");
         if(Session.get('locked')==true){
-        return getx(Players.findOne({id: Session.get('id')}).position.latitude,Players.findOne({id: Session.get('id')}).position.longitude,this.position.latitude,this.position.longitude)-13;
+            var zoom = Session.get('zoom');
+            if (typeof zoom == 'undefined') {
+                zoom = 0.5;
+            }
+        return getx(Players.findOne({id: Session.get('id')}).position.latitude,Players.findOne({id: Session.get('id')}).position.longitude,this.position.latitude,this.position.longitude,zoom)-13;
     }
     else{
-        return getx(Session.get('lastPos').lat,Session.get('lastPos').long,this.position.latitude,this.position.longitude)-13;
+        var zoom = Session.get('zoom');
+            if (typeof zoom == 'undefined') {
+                zoom = 0.5;
+            }
+        return getx(Session.get('lastPos').lat,Session.get('lastPos').long,this.position.latitude,this.position.longitude,zoom)-13;
     }
     },
     y:function(){
         console.log("hi");
         if(Session.get('locked')==true){
-        return gety(Players.findOne({id: Session.get('id')}).position.latitude,Players.findOne({id: Session.get('id')}).position.longitude,this.position.latitude,this.position.longitude)-13;
+            var zoom = Session.get('zoom');
+            if (typeof zoom == 'undefined') {
+                zoom = 0.5;
+            }
+        return gety(Players.findOne({id: Session.get('id')}).position.latitude,Players.findOne({id: Session.get('id')}).position.longitude,this.position.latitude,this.position.longitude,zoom)-13;
     }
     else{
-        return gety(Session.get('lastPos').lat,Session.get('lastPos').long,this.position.latitude,this.position.longitude)-13;
+        var zoom = Session.get('zoom');
+            if (typeof zoom == 'undefined') {
+                zoom = 0.5;
+            }
+        return gety(Session.get('lastPos').lat,Session.get('lastPos').long,this.position.latitude,this.position.longitude,zoom)-13;
     }
     },
     xu:function(){
@@ -345,19 +376,33 @@ Template.dot.helpers({
                      }
                  }
              }
-             var x = getx(player.position.latitude,player.position.longitude,this.position.latitude,this.position.longitude);
+             var zoom = Session.get('zoom');
+            if (typeof zoom == 'undefined') {
+                zoom = 0.5;
+            }
+             var x = getx(player.position.latitude,player.position.longitude,this.position.latitude,this.position.longitude,zoom);
         return x;
     }
     else{
-        return getx(Session.get('lastPos').lat,Session.get('lastPos').long,this.position.latitude,this.position.longitude);
+        var zoom = Session.get('zoom');
+            if (typeof zoom == 'undefined') {
+                zoom = 0.5;
+            }
+        return getx(Session.get('lastPos').lat,Session.get('lastPos').long,this.position.latitude,this.position.longitude,zoom);
     }
     },
     yu:function(){
-         if(Session.get('locked')==true){
-        return gety(Players.findOne({id: Session.get('id')}).position.latitude,Players.findOne({id: Session.get('id')}).position.longitude,this.position.latitude,this.position.longitude);
+         if(Session.get('locked')==true){var zoom = Session.get('zoom');
+            if (typeof zoom == 'undefined') {
+                zoom = 0.5;
+            }
+        return gety(Players.findOne({id: Session.get('id')}).position.latitude,Players.findOne({id: Session.get('id')}).position.longitude,this.position.latitude,this.position.longitude,zoom);
     }
-    else{
-        return gety(Session.get('lastPos').lat,Session.get('lastPos').long,this.position.latitude,this.position.longitude);
+    else{var zoom = Session.get('zoom');
+            if (typeof zoom == 'undefined') {
+                zoom = 0.5;
+            }
+        return gety(Session.get('lastPos').lat,Session.get('lastPos').long,this.position.latitude,this.position.longitude,zoom);
     }
     },
     accuracy:function(){
@@ -372,11 +417,11 @@ Template.dot.helpers({
     }
     }
 });
-function getx(yourlat,yourlng,lat,lng){
-        return (window.innerWidth/2) + (distance(yourlat,yourlng,yourlat,lng)*Session.get("zoom"));
+function getx(yourlat,yourlng,lat,lng,zoom){
+        return (window.innerWidth/2) + (distance(yourlat,yourlng,yourlat,lng)*zoom);
     }
-    function gety(yourlat,yourlng,lat,lng){
-        return ((window.innerHeight-144)/2) + (distance(yourlat,yourlng,lat,yourlng)*Session.get("zoom"));
+    function gety(yourlat,yourlng,lat,lng,zoom){
+        return ((window.innerHeight-144)/2) + (distance(yourlat,yourlng,lat,yourlng)*zoom);
     }
 function distance(lat1, lng1, lat2, lng2) {
     earthRadius = 6371000; //meters
