@@ -337,7 +337,14 @@ Template.dot.helpers({
             if (typeof zoom == 'undefined') {
                 zoom = 0.5;
             }
-        return getx(Session.get('lastPos').lat,Session.get('lastPos').long,this.position.latitude,this.position.longitude,zoom)-13;
+        var lastPos = Session.get('lastPos');
+        if (typeof lastPos == 'undefined') {
+            lastPos = {
+                lat: null,
+                long: null
+            }
+        }
+        return getx(lastPos.lat,lastPos.long,this.position.latitude,this.position.longitude,zoom)-13;
     }
     },
     y:function(){
@@ -354,7 +361,13 @@ Template.dot.helpers({
             if (typeof zoom == 'undefined') {
                 zoom = 0.5;
             }
-        return gety(Session.get('lastPos').lat,Session.get('lastPos').long,this.position.latitude,this.position.longitude,zoom)-13;
+        if (typeof lastPos == 'undefined') {
+            lastPos = {
+                lat: null,
+                long: null
+            }
+        }
+        return gety(lastPos.lat,lastPos.long,this.position.latitude,this.position.longitude,zoom)-13;
     }
     },
     xu:function(){
@@ -402,7 +415,13 @@ Template.dot.helpers({
             if (typeof zoom == 'undefined') {
                 zoom = 0.5;
             }
-        return gety(Session.get('lastPos').lat,Session.get('lastPos').long,this.position.latitude,this.position.longitude,zoom);
+         if (typeof lastPos == 'undefined') {
+            lastPos = {
+                lat: null,
+                long: null
+            }
+        }
+        return gety(lastPos.lat,lastPos.long,this.position.latitude,this.position.longitude,zoom);
     }
     },
     accuracy:function(){
