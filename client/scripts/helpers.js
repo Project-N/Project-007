@@ -324,7 +324,6 @@ Template.viewport.helpers({
 });
 Template.dot.helpers({
     x:function(){
-        console.log("hi");
         if(Session.get('locked')==true){
             var zoom = Session.get('zoom');
             if (typeof zoom == 'undefined') {
@@ -348,7 +347,6 @@ Template.dot.helpers({
     }
     },
     y:function(){
-        console.log("hi");
         if(Session.get('locked')==true){
             var zoom = Session.get('zoom');
             if (typeof zoom == 'undefined') {
